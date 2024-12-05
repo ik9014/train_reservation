@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>좌석 선택</title>
+    <link rel="stylesheet" href="/css/Select_Seat.css">
+</head>
+<body>
+<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <span th:text="${trainName}"> </span>&nbsp;
+    <span th:text="${trainNum}"></span>번 열차</h1>
+
+<script>
+    const uniqueKey = "[[${uniqueKey}]]"; // Thymeleaf에서 값을 전달
+    console.log("uniqueKey:", uniqueKey); // 콘솔 로그로 값 확인
+</script>
+
+<div class="train-tabs">
+    <button class="tab active" onclick="selectCarriage(1, uniqueKey)">1호차</button>
+    <button class="tab" onclick="selectCarriage(2, uniqueKey)">2호차</button>
+    <button class="tab" onclick="selectCarriage(3, uniqueKey)">3호차</button>
+    <button class="tab" onclick="selectCarriage(4, uniqueKey)">4호차</button>
+    <button class="tab" onclick="selectCarriage(5, uniqueKey)">5호차</button>
+</div>
+
+<!-- 좌석 배치 -->
+<div id="seat-map">
+    <!-- JavaScript로 동적으로 생성된 좌석 -->
+</div>
+
+<!-- 선택된 좌석 -->
+<div class="selected-seats">
+    <h3>선택된 좌석:</h3>
+    <p id="selected-seats-list">없음</p>
+</div>
+<!-- 완료 버튼 -->
+<button id="Test" onclick="removeSeatsByUniqueKey('3,2024-12-01,05:27', '1', '1A')">dd</button>
+
+<form action="/payment" method="post" style="display:flex; justify-content:center;">
+    <div class="controls">
+        <button id="submitBtn" onclick="submitSeats()" disabled>결제하기</button>
+        <input type="hidden" name="selectSeat" id="selectedSeatsInput">
+        <input type="hidden" name="depTime" th:value="${depTime}">
+        <input type="hidden" name="arrTime" th:value="${arrTime}">
+        <input type="hidden" name="trainName" th:value="${trainName}">
+        <input type="hidden" name="trainNum" th:value="${trainNum}">
+        <input type="hidden" name="adultCharge" th:value="${adultCharge}">
+        <input type="hidden" name="departure" th:value="${departure}">
+        <input type="hidden" name="arrival" th:value="${arrival}">
+        <input type="hidden" name="passengerCount" th:value="${passengerCount}">
+        <input type="hidden" name="departureTime" th:value="${departureTime}">
+        <input type="hidden" name="pkId" th:value="${pkId}"> <!-- ticket 생성을 위한 User Id 전송 -->
+    </div>
+</form>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const passengerCount = /*[[${passengerCount}]]*/ 0; // Thymeleaf에서 승객 수 전달
+    /*]]>*/
+</script>
+<script src="/js/Trainseat.js"></script>
+</body>
+</html>

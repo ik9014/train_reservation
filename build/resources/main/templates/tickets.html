@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <link rel="stylesheet" href="/css/search_result.css">
+  <script src="/js/checkLogin.js" defer></script>
+  <script src="/js/popup.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <a href="/sogong/train/main">
+        <img src="/img/logo.png" alt="Logo">
+      </a>
+      <span>Train ticket</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="results-section">
+    <h2>승차권 조회</h2>
+    <table class="result-table">
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th>날짜</th>
+        <th>출발역</th>
+        <th>도착역</th>
+        <th>출발 시각</th>
+        <th>도착 시각</th>
+        <th>조회</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${#lists.isEmpty(tickets)}">
+        <td colspan="7">예매한 티켓이 없습니다.</td>
+      </tr>
+      <tr th:each="ticket, iter : ${tickets}">
+        <td th:text="${iter.index + 1}"></td>
+          <td th:text="${ticket.departureTime}"></td>
+        <td th:text="${ticket.departure}"></td>
+        <td th:text="${ticket.arrival}"></td>
+        <td th:text="${ticket.depTime}"></td>
+        <td th:text="${ticket.arrTime}"></td>
+        <td>
+          <form th:action="@{/ticket/{id}(id=${ticket.trainId})}" method="get" style="display:inline-block;">
+            <button type="submit">상세조회</button>
+          </form>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2024 Train Reservation. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
