@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/css/search_result.css">
+    <script src="/js/checkLogin.js" defer></script>
+    <script src="/js/popup.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+
+                <img src="/img/logo.png" alt="Logo">
+
+                <span>Train Reservation</span>
+            </div>
+        </div>
+    </header>
+<main>
+    <section class="results-section">
+        <h2>검색 결과</h2>
+        <p th:text="'출발지: ' + ${departure} +  ' 도착지: ' + ${arrival}" class="info"></p>
+        <p th:text="'출발 날짜: ' + ${departureTime} + ', 승객 수: ' + ${passengerCount} + '명'" class="info"></p>
+
+        <table class="result-table">
+            <thead>
+            <tr>
+                <th>출발 시간</th>
+                <th>도착 시간</th>
+                <th>열차 이름</th>
+                <th>열차 번호</th>
+                <th>운임 요금</th>
+                <th>승차권예약</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(trainSchedule)}">
+                <td colspan="6">검색 결과가 없습니다.</td>
+            </tr>
+            <tr th:each="train : ${trainSchedule}">
+                <td th:text="${train.depTime}"></td>
+                <td th:text="${train.arrTime}"></td>
+                <td th:text="${train.trainName}"></td>
+                <td th:text="${train.trainNum}"></td>
+                <td th:text="${train.adultCharge}+'원'"></td>
+                <td>
+                    <!-- 예약 버튼 추가 -->
+                    <!-- 로그인 상태를 데이터 속성으로 전달 -->
+                    <div id="loginStatus" th:data-is-logged-in="${session.Id != null}"></div>
+
+                    <!-- 좌석 선택 버튼 추가 -->
+                    <form action="/selectSeat" method="post" style="display:inline-block;">
+                        <input type="hidden" name="depTime" th:value="${train.depTime}">
+                        <input type="hidden" name="arrTime" th:value="${train.arrTime}">
+                        <input type="hidden" name="trainName" th:value="${train.trainName}">
+                        <input type="hidden" name="trainNum" th:value="${train.trainNum}">
+                        <input type="hidden" name="adultCharge" th:value="${train.adultCharge}">
+                        <input type="hidden" name="departure" th:value="${departure}">
+                        <input type="hidden" name="arrival" th:value="${arrival}">
+                        <input type="hidden" name="passengerCount" th:value="${passengerCount}">
+                        <input type="hidden" name="departureTime" th:value="${departureTime}">
+                        <input type="hidden" name="pkId" th:value="${session.Id}"> <!-- ticket 생성을 위한 User Id 전송 -->
+                        <button type="submit" class="seat-select-btn" onclick="return checkLogin(event)">예약</button>
+                    </form>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <!-- 로그인 확인: name이 null이 아니면 메인 반환 아니면 index 반환 -->
+        <a th:if="${session.loginName != null}" href="/sogong/train/main" class="search-again-btn">다시 검색</a>
+        <a th:if="${session.loginName == null}" href="/" class="search-again-btn">다시 검색</a>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Train Reservation. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

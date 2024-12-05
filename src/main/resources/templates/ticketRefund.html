@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/pay.css">
+    <script src="/js/Trainseat.js"></script>
+    <script>
+        const uniqueKey = "[[${uniqueKey}]]"; // Thymeleaf에서 값을 전달
+        const carriageNum = "[[${carriageNum}]]"; // Thymeleaf에서 값을 전달
+        const seatNum = "[[${seatNum}]]"; // Thymeleaf에서 값을 전달
+        console.log("uniqueKey:", uniqueKey); // 콘솔 로그로 값 확인
+    </script>
+    <meta charset="UTF-8">
+    <title>refund</title>
+</head>
+<body>
+    <main>
+        <div class="info-header2">환불이 완료되었습니다</div>
+        <form action="/tickets" method="post">
+            <input type="hidden" name="seatId" th:value="${seatId}">
+            <button class="btn_ok" type="submit" onclick="removeSeatsByUniqueKey(uniqueKey, carriageNum, seatNum)">확인</button>
+        </form>
+    </main>
+</body>
+</html>

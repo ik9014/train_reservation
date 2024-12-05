@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+  <link rel="stylesheet" href="/css/add_user.css">
+  <script src="/js/save.js" defer></script>
+</head>
+
+<body>
+<div class="signup-container">
+  <h2>회원가입</h2>
+  <form action="/sogong/train/save" method="post" id="signupForm">
+    <div class="form-group">
+      <input type="text" id="name" name="name" autocomplete="off" required>
+      <label for="name">Name</label>
+      <span class="error-message" id="nameError"></span>
+    </div>
+    <div class="form-group">
+      <input type="email" id="email" name="email" autocomplete="off" required>
+      <label for="email">Email</label>
+      <span class="error-message" id="emailError"></span>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" name="password" autocomplete="off" required>
+      <label for="password">Password</label>
+      <span class="error-message" id="passwordError"></span>
+    </div>
+    <div class="form-group">
+      <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="off" required>
+      <label for="confirmPassword">Confirm Password</label>
+      <span class="error-message" id="confirmPasswordError"></span>
+    </div>
+    <div class="form-group">
+      <input type="text" id="phone" name="phone" autocomplete="off" required>
+      <label for="phone">Phone</label>
+      <span class="error-message" id="phoneError"></span>
+    </div>
+    <button type="submit">회원가입</button>
+  </form>
+</div>
+
+</body>
+
+</html>

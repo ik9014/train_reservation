@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/pay.css">
+
+  <script src="/js/checkLogin.js" defer></script>
+
+  <title>티켓 상세 정보</title>
+</head>
+<body>
+  <h1>좌석 조회</h1>
+  <main>
+    <div class="info-section">
+      <div class="info-header">열차 예약 정보</div>
+      <div class="info-details2">
+        <span th:text="${train.trainName}">KTX</span>
+        <span th:text="${train.trainNum}">233</span>&emsp;
+
+        <span th:text="${seats.carriageNum}"></span>호차&nbsp;
+        <span th:text="${seats.seat}"></span><br>
+
+        <span th:text="${train.depTime}">06:40</span> 출발
+      </div><br><br><br><br><br><br><br><br><br>
+
+      <form action="/ticket/refund" method="POST">
+          <input type="hidden" name="seatId" th:value="${seats.seatId}">
+          <input type="hidden" name="trainId" th:value="${train.trainId}">
+        <button type="submit">환불하기</button>
+      </form>
+
+      <div class="passenger-count">
+      </div>
+      <div class="member-seat">
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
