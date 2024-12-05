@@ -5,4 +5,5 @@
 ![3](https://github.com/user-attachments/assets/10161a92-415b-47ac-8a7c-9c2f5a2173d4)
 
 3. 멤버 데이터가 DB에 저장된 모습
+
 ![4](https://github.com/user-attachments/assets/bfaaa462-ea01-483b-8b7f-0fcbf65df3ba)
