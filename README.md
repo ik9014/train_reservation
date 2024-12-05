@@ -17,7 +17,7 @@
 ![7](https://github.com/user-attachments/assets/105a47bd-9a08-4d19-9ef7-9bd7c9af96b7)
 
 ## 입력한 정보를 기반으로 API호출을 하고
-![8](https://github.com/user-attachments/assets/e3d51677-4f36-4205-8752-d0a5923ab440)
+![20](https://github.com/user-attachments/assets/74e6c37b-e23d-4753-8d4b-d00f50e8870d)
 
 ## 호출을 통해 얻은 정보들을 재가공하여 화면상에 표시한다
 ![image](https://github.com/user-attachments/assets/658202fa-cf6b-4e26-918a-79624594134a)
